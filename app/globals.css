@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  background: #070909;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  @apply bg-background text-white font-body antialiased;
+}
+
+::selection {
+  background: rgba(111, 255, 233, 0.25);
+}
+
+.glass {
+  @apply bg-white/5 border border-white/10 backdrop-blur-xl;
+}
