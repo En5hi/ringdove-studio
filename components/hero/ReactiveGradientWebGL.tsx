@@ -174,10 +174,10 @@ export function ReactiveGradientWebGL({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const canvasEl = canvasRef.current;
+    if (!canvasEl) return;
 
-    const gl = createGLContext(canvas);
+    const gl = createGLContext(canvasEl);
     if (!gl) return;
 
     const params: GradientParams = { ...defaultParams, ...initialParams };
@@ -243,7 +243,7 @@ export function ReactiveGradientWebGL({
 
     const resize = () => {
       const dpr = noretina ? 1 : window.devicePixelRatio || 1;
-      const size = setCanvasSize(gl, canvas, dpr);
+      const size = setCanvasSize(gl, canvasEl, dpr);
       gl.uniform2f(uniformLocations.viewport, size.width, size.height);
       scheduleRender();
     };
@@ -252,7 +252,7 @@ export function ReactiveGradientWebGL({
 
     const handlePointer = (event: PointerEvent) => {
       if (!interactive || prefersReduced) return;
-      const rect = canvas.getBoundingClientRect();
+      const rect = canvasEl.getBoundingClientRect();
       const clamp = (value: number) => Math.max(0, Math.min(1, value));
       pointerTarget = {
         x: clamp((event.clientX - rect.left) / rect.width),
@@ -283,7 +283,7 @@ export function ReactiveGradientWebGL({
         return;
       }
       const dpr = noretina ? 1 : window.devicePixelRatio || 1;
-      const size = setCanvasSize(gl, canvas, dpr);
+      const size = setCanvasSize(gl, canvasEl, dpr);
 
       const ease = prefersReduced ? 0.05 : 0.2;
       pointer.x = lerp(pointer.x, pointerTarget.x, ease);
