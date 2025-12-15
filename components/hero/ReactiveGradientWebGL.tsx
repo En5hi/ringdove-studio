@@ -232,7 +232,7 @@ export function ReactiveGradientWebGL({
 
     setStaticUniforms();
 
-    let pointer = { x: 0.5, y: 0.5 };
+    const pointer = { x: 0.5, y: 0.5 };
     let pointerTarget = { x: 0.5, y: 0.5 };
     let zoom = params.zoom;
     let zoomTarget = params.zoom;
