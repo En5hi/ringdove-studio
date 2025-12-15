@@ -48,12 +48,13 @@ export function SlidingPanel({ content, experiments }: SlidingPanelProps) {
 
   return (
     <motion.section
-      className="relative z-20 rounded-t-[32px] border-t border-border bg-surface/90 backdrop-blur-3xl shadow-2xl shadow-black/40"
+      className="relative z-20 rounded-t-[32px] border-t border-white/10 bg-black/25 backdrop-blur-[30px] shadow-[0_-30px_120px_rgba(0,0,0,0.55)]"
       initial={reduceMotion ? false : { opacity: 0, y: 120 }}
       animate={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 py-12 lg:flex-row lg:gap-12 lg:px-10 lg:py-16">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60 mix-blend-normal" />
+      <div className="relative mx-auto flex max-w-6xl flex-col gap-10 px-5 py-12 lg:flex-row lg:gap-12 lg:px-10 lg:py-16">
         <div className="lg:w-1/4">
           <LeftNav items={content.nav.items} activeId={active} />
         </div>

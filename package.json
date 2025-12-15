@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run prepare:unicorn && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare:unicorn": "node scripts/unicorn/prepare-unicorn-bg.mjs"
   },
   "dependencies": {
-    "class-variance-authority": "^0.7.0",
     "@vercel/functions": "^1.5.1",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.24",
     "next": "15.0.7",
@@ -18,12 +19,14 @@
     "react-dom": "18.3.1",
     "resend": "^3.0.0",
     "tailwind-merge": "^2.5.2",
+    "three": "^0.178.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "22.8.1",
     "@types/react": "18.3.11",
     "@types/react-dom": "18.3.1",
+    "@types/three": "^0.182.0",
     "autoprefixer": "10.4.20",
     "eslint": "8.57.1",
     "eslint-config-next": "15.0.3",

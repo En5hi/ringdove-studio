@@ -14,7 +14,8 @@ Then open `http://localhost:3000`.
 ## Scripts
 
 - `npm run dev` — start dev server
-- `npm run build` — production build
+- `npm run prepare:unicorn` — strip non-effect layers from the Unicorn export into `public/unicorn/flow_gradient.bg.json`
+- `npm run build` — prepare Unicorn assets then run the production build
 - `npm run start` — run built app
 - `npm run lint` — lint
 
@@ -26,6 +27,8 @@ Create `.env.local` (see `.env.example`):
 - `CONTACT_TO_EMAIL` — destination inbox for the contact form
 - `DRIBBBLE_TOKEN` — optional, fetches latest Dribbble shots server-side
 - `NEXT_PUBLIC_SITE_URL` — base URL (optional for metadata)
+- `NEXT_PUBLIC_BG_MODE` — `webgl` (default) or `unicorn` to switch hero background
+- `NEXT_PUBLIC_UNICORN_BG_VERSION` — optional version string appended to the Unicorn JSON for cache busting
 
 ## Contact Form (Server Action)
 

@@ -17,8 +17,14 @@ const config: Config = {
         border: "#1c252b"
       },
       fontFamily: {
-        display: ["var(--font-display)", "Inter", "system-ui"],
-        body: ["var(--font-body)", "Inter", "system-ui"]
+        display: ["var(--font-display)", "PP Neue Montreal", "Helvetica", "Arial", "sans-serif"],
+        body: [
+          "var(--font-body)",
+          "JetBrains Mono",
+          "SFMono-Regular",
+          "Menlo",
+          "monospace"
+        ]
       },
       boxShadow: {
         glow: "0 0 60px rgba(111, 255, 233, 0.25)"
