@@ -278,7 +278,7 @@ export function ReactiveGradientWebGL({
     };
 
     function render() {
-      if (!visible) {
+      if (!visible || !gl) {
         frame = null;
         return;
       }
