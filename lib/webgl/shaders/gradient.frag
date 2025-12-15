@@ -86,7 +86,6 @@ void main() {
   float mixer = clamp(0.5 + 0.5 * sin((uv.x + uv.y) * 0.75 + baseNoise * 2.0), 0.0, 1.0);
 
   vec3 color = mix(colA, colB, mixer);
-  color += lens * 0.3;
   color += (noise(uv * (uNoiseSize * 2.0) + uSeed * 2.3) - 0.5) * uNoiseIntensity * 0.06;
 
   gl_FragColor = vec4(color, 1.0);

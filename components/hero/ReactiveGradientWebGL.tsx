@@ -157,7 +157,6 @@ void main() {
   float mixer = clamp(0.5 + 0.5 * sin((uv.x + uv.y) * 0.75 + baseNoise * 2.0), 0.0, 1.0);
 
   vec3 color = mix(colA, colB, mixer);
-  color += lens * 0.3;
   color += (noise(uv * (uNoiseSize * 2.0) + uSeed * 2.3) - 0.5) * uNoiseIntensity * 0.06;
 
   gl_FragColor = vec4(color, 1.0);
@@ -237,7 +236,7 @@ export function ReactiveGradientWebGL({
     let pointerTarget = { x: 0.5, y: 0.5 };
     let zoom = params.zoom;
     let zoomTarget = params.zoom;
-    let frame = 0;
+    let frame: number | null = null;
     let visible = true;
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let prefersReduced = mediaQuery.matches;
@@ -246,6 +245,7 @@ export function ReactiveGradientWebGL({
       const dpr = noretina ? 1 : window.devicePixelRatio || 1;
       const size = setCanvasSize(gl, canvas, dpr);
       gl.uniform2f(uniformLocations.viewport, size.width, size.height);
+      scheduleRender();
     };
 
     resize();
@@ -269,7 +269,7 @@ export function ReactiveGradientWebGL({
     const handleVisibility = () => {
       visible = !document.hidden;
       if (visible) {
-        frame = requestAnimationFrame(render);
+        scheduleRender();
       }
     };
 
@@ -277,44 +277,69 @@ export function ReactiveGradientWebGL({
       prefersReduced = event.matches;
     };
 
-    const render = (timestamp: number) => {
-      if (!visible) return;
+    function render() {
+      if (!visible) {
+        frame = null;
+        return;
+      }
       const dpr = noretina ? 1 : window.devicePixelRatio || 1;
       const size = setCanvasSize(gl, canvas, dpr);
 
-      const ease = prefersReduced ? 0.05 : 0.15;
+      const ease = prefersReduced ? 0.05 : 0.2;
       pointer.x = lerp(pointer.x, pointerTarget.x, ease);
       pointer.y = lerp(pointer.y, pointerTarget.y, ease);
-      zoom = lerp(zoom, zoomTarget, prefersReduced ? 0.05 : 0.1);
-
-      const timeScale = prefersReduced ? 0.1 : 1;
-      const animatedSeed = params.seed + timestamp * 0.00035 * timeScale;
+      zoom = lerp(zoom, zoomTarget, prefersReduced ? 0.05 : 0.12);
 
       gl.useProgram(program);
       gl.clearColor(0.0, 0.0, 0.0, 1.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.uniform1f(uniformLocations.seed, animatedSeed);
+      gl.uniform1f(uniformLocations.seed, params.seed);
       gl.uniform1f(uniformLocations.zoom, zoom);
       gl.uniform2f(uniformLocations.pointer, pointer.x, 1.0 - pointer.y);
       gl.uniform2f(uniformLocations.viewport, size.width, size.height);
 
       gl.drawArrays(gl.TRIANGLES, 0, 3);
-      frame = requestAnimationFrame(render);
+
+      const moving =
+        Math.abs(pointer.x - pointerTarget.x) > 0.0005 ||
+        Math.abs(pointer.y - pointerTarget.y) > 0.0005 ||
+        Math.abs(zoom - zoomTarget) > 0.0005;
+
+      if (moving) {
+        frame = requestAnimationFrame(render);
+      } else {
+        frame = null;
+      }
+    }
+
+    function scheduleRender() {
+      if (frame === null) {
+        frame = requestAnimationFrame(render);
+      }
+    }
+
+    scheduleRender();
+
+    const onPointerMove = (e: PointerEvent) => {
+      handlePointer(e);
+      scheduleRender();
+    };
+    const onWheel = (e: WheelEvent) => {
+      handleWheel(e);
+      scheduleRender();
     };
 
-    frame = requestAnimationFrame(render);
-
     window.addEventListener("resize", resize);
-    window.addEventListener("pointermove", handlePointer, { passive: true });
-    window.addEventListener("wheel", handleWheel, { passive: true });
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("wheel", onWheel, { passive: true });
     document.addEventListener("visibilitychange", handleVisibility);
     mediaQuery.addEventListener("change", handleMotionChange);
 
     return () => {
-      cancelAnimationFrame(frame);
+      if (frame !== null) cancelAnimationFrame(frame);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("pointermove", handlePointer);
-      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("wheel", onWheel);
       document.removeEventListener("visibilitychange", handleVisibility);
       mediaQuery.removeEventListener("change", handleMotionChange);
       gl.deleteBuffer(buffer);
