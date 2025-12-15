@@ -19,12 +19,13 @@ export function PageShell({ content, experiments }: PageShellProps) {
   });
 
   const heroOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
+  const heroBlur = useTransform(scrollYProgress, [0, 0.65], ["0px", "16px"]);
   const panelY = useTransform(scrollYProgress, [0, 1], ["50vh", "0vh"]);
 
   return (
     <main className="bg-background text-white">
       <section ref={heroRef}>
-        <Hero hero={content.hero} opacity={heroOpacity} locale={content.locale} />
+        <Hero hero={content.hero} opacity={heroOpacity} blur={heroBlur} locale={content.locale} />
       </section>
       <motion.div style={{ y: panelY }} className="-mt-32">
         <SlidingPanel content={content} experiments={experiments} />
