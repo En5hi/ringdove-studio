@@ -3,9 +3,8 @@ import type { SiteContent } from "../lib/i18n";
 export const contentPl: SiteContent = {
   locale: "pl",
   hero: {
-    logo: "Ringdove Studio",
-    slogan: "Projektujemy i tworzymy odważne doświadczenia cyfrowe.",
-    corner: "Z siedzibą w Europie · Dostępni na wybrane współprace"
+    logo: "ringdove",
+    slogan: "Projektujemy i tworzymy odważne doświadczenia cyfrowe."
   },
   nav: {
     title: "Nawigacja",

@@ -24,7 +24,7 @@ export function PageShell({ content, experiments }: PageShellProps) {
   return (
     <main className="bg-background text-white">
       <section ref={heroRef}>
-        <Hero hero={content.hero} opacity={heroOpacity} />
+        <Hero hero={content.hero} opacity={heroOpacity} locale={content.locale} />
       </section>
       <motion.div style={{ y: panelY }} className="-mt-32">
         <SlidingPanel content={content} experiments={experiments} />

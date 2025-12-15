@@ -38,6 +38,7 @@ export function ReactiveBackgroundCanvas() {
       const dpr = window.devicePixelRatio || 1;
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
       blobs.length = 0;
       for (let i = 0; i < 4; i++) {

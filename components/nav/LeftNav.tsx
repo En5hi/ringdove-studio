@@ -1,20 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { localePaths, NavItem, Locale } from "../../lib/i18n";
-import { localeCookie } from "../../lib/geo";
+import { NavItem } from "../../lib/i18n";
 import { cn } from "../../lib/utils";
 
 type LeftNavProps = {
   items: NavItem[];
   activeId?: string;
-  locale: Locale;
 };
 
-export function LeftNav({ items, activeId, locale }: LeftNavProps) {
-  const router = useRouter();
+export function LeftNav({ items, activeId }: LeftNavProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -30,37 +26,10 @@ export function LeftNav({ items, activeId, locale }: LeftNavProps) {
     history.replaceState(null, "", `#${id}`);
   };
 
-  const switchLocale = (target: Locale) => {
-    document.cookie = `${localeCookie}=${target};path=/;max-age=${60 * 60 * 24 * 180};samesite=lax`;
-    router.push(localePaths[target]);
-  };
-
   return (
     <div className="sticky top-8 z-20">
       <div className="mb-6 flex items-center justify-between gap-4 lg:flex-col lg:items-start">
         <div className="text-xs uppercase tracking-[0.25em] text-muted">Menu</div>
-        <div className="flex items-center gap-2 rounded-full border border-border px-3 py-1 text-xs">
-          <button
-            onClick={() => switchLocale("en")}
-            className={cn(
-              "rounded-full px-3 py-1 transition",
-              locale === "en" ? "bg-white text-black" : "text-muted hover:text-white"
-            )}
-            aria-pressed={locale === "en"}
-          >
-            EN
-          </button>
-          <button
-            onClick={() => switchLocale("pl")}
-            className={cn(
-              "rounded-full px-3 py-1 transition",
-              locale === "pl" ? "bg-white text-black" : "text-muted hover:text-white"
-            )}
-            aria-pressed={locale === "pl"}
-          >
-            PL
-          </button>
-        </div>
         <button
           onClick={() => setOpen((o) => !o)}
           className="ml-auto inline-flex items-center gap-2 rounded-full border border-border px-3 py-2 text-xs text-muted transition hover:border-white/30 hover:text-white lg:hidden"

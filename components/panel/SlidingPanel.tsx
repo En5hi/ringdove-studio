@@ -55,7 +55,7 @@ export function SlidingPanel({ content, experiments }: SlidingPanelProps) {
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 py-12 lg:flex-row lg:gap-12 lg:px-10 lg:py-16">
         <div className="lg:w-1/4">
-          <LeftNav items={content.nav.items} activeId={active} locale={content.locale} />
+          <LeftNav items={content.nav.items} activeId={active} />
         </div>
         <div className="flex-1 space-y-16 lg:space-y-20">
           <About copy={content.sections.about} />

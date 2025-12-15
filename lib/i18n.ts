@@ -54,7 +54,6 @@ export type SiteContent = {
   hero: {
     logo: string;
     slogan: string;
-    corner: string;
   };
   nav: {
     title: string;

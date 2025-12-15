@@ -3,9 +3,8 @@ import type { SiteContent } from "../lib/i18n";
 export const contentEn: SiteContent = {
   locale: "en",
   hero: {
-    logo: "Ringdove Studio",
-    slogan: "Design-led digital experiments for brands with edge.",
-    corner: "Based in Europe · Available for select collaborations"
+    logo: "ringdove",
+    slogan: "Design-led digital experiments for brands with edge."
   },
   nav: {
     title: "Navigate",
