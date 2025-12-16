@@ -61,15 +61,16 @@ export function Hero({
 
   const tint = useMemo(() => {
     switch (activeSection) {
-      case "projects":
-        return "rgba(255,140,96,0.18)";
-      case "experiments":
-        return "rgba(120,255,210,0.16)";
-      case "contact":
-        return "rgba(220,220,255,0.14)";
       case "about":
+        return "rgba(255,120,40,0.45)"; // More saturated orange
+      case "projects":
+        return "rgba(40,220,240,0.42)"; // More vivid teal
+      case "experiments":
+        return "rgba(255,60,80,0.42)"; // More saturated red
+      case "contact":
+        return "rgba(160,100,255,0.4)"; // More vivid purple
       default:
-        return "rgba(120,140,255,0.18)";
+        return "rgba(255,120,40,0.45)";
     }
   }, [activeSection]);
 
@@ -78,20 +79,7 @@ export function Hero({
   const fallbackTint = useMotionValue(0);
   const safeTintStrength = tintStrength ?? fallbackTint;
   const tintOpacity = safeTintStrength;
-  const hueAngle = useMemo(() => {
-    switch (activeSection) {
-      case "projects":
-        return 24;
-      case "experiments":
-        return 60;
-      case "contact":
-        return 110;
-      default:
-        return 0;
-    }
-  }, [activeSection]);
-  const hueRotate = useTransform(safeTintStrength, (v) => v * hueAngle);
-  const backgroundFilter = useMotionTemplate`${backgroundBlur} hue-rotate(${hueRotate}deg)`;
+  const backgroundFilter = useMotionTemplate`${backgroundBlur}`;
 
   useEffect(() => {
     const formatter = new Intl.DateTimeFormat("en-GB", {
@@ -119,7 +107,7 @@ export function Hero({
           <motion.div
             className="absolute inset-0 z-[1] pointer-events-none"
             animate={{ backgroundColor: tint }}
-            style={{ opacity: tintOpacity, mixBlendMode: "screen" }}
+            style={{ opacity: tintOpacity, mixBlendMode: "overlay" }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           />
           {useUnicornBackground ? (
@@ -212,13 +200,14 @@ export function Hero({
             {"A\nDIGITAL\nDESIGN\nAGENCY"}
           </motion.div>
           <motion.div
-            className="whitespace-pre text-right"
+            className="flex flex-col items-end gap-2 text-right"
             style={{
               opacity: rightOpacity,
               fontFamily: "var(--font-body)"
             }}
           >
-            {"BASED\nIN POLAND\nSHIPPING\nEVERYWHERE"}
+            <div className="whitespace-pre">{"BASED\nIN POLAND"}</div>
+            <div className="whitespace-pre">{"SHIPPING\nEVERYWHERE"}</div>
           </motion.div>
         </div>
       </motion.div>
