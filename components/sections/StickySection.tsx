@@ -70,10 +70,10 @@ export function StickySection({ id, className, children }: StickySectionProps) {
         className
       )}
     >
-      <div className="sticky top-0 flex h-screen items-center justify-center">
+      <div className="sticky top-0 flex h-screen items-center justify-center px-4 md:px-8">
         <motion.div
           style={{ opacity, filter: blur, y }}
-          className="pointer-events-auto"
+          className="pointer-events-auto w-full"
         >
           {childrenWithProps}
         </motion.div>

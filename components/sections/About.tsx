@@ -8,9 +8,6 @@ type AboutProps = {
   scrollYProgress?: MotionValue<number>;
 };
 
-const paragraph1 = "We're a design-led digital studio that transforms bold ideas into exceptional experiences. Our designer-first approach pairs visual exploration with resilient engineering—shipping fast, iterating with intent, and obsessing over the details that make interfaces feel alive.";
-const paragraph2 = "From interactive brand stories to audio software design, we specialize in work that doesn't just look brilliant, but works brilliantly.";
-
 function AnimatedWord({ word, index, totalWords, startProgress, endProgress, scrollYProgress, isLast }: { 
   word: string; 
   index: number; 
@@ -38,6 +35,7 @@ function AnimatedWord({ word, index, totalWords, startProgress, endProgress, scr
 }
 
 function AnimatedParagraph({ text, startProgress, endProgress, scrollYProgress }: { text: string; startProgress: number; endProgress: number; scrollYProgress: MotionValue<number> }) {
+  if (!text) return null;
   const words = text.split(" ");
   const totalWords = words.length;
   
@@ -60,6 +58,10 @@ function AnimatedParagraph({ text, startProgress, endProgress, scrollYProgress }
 }
 
 export function About({ copy, scrollYProgress }: AboutProps) {
+  // Split body text into paragraphs
+  const paragraphs = copy.body.split('\n\n').filter(p => p.trim());
+  const [paragraph1, paragraph2] = paragraphs;
+  
   // If scrollYProgress is provided (from StickySection), use animated paragraphs
   // Otherwise render static text
   if (!scrollYProgress) {
@@ -67,21 +69,22 @@ export function About({ copy, scrollYProgress }: AboutProps) {
       <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 text-left">
         <h2 className="font-display text-4xl uppercase tracking-[0.12em]">{copy.heading}</h2>
         <div className="space-y-4 text-2xl leading-relaxed text-white/85">
-          <p>{paragraph1}</p>
-          <p>{paragraph2}</p>
+          {paragraphs.map((para, index) => (
+            <p key={index}>{para}</p>
+          ))}
         </div>
       </div>
     );
   }
   
-  // Slowmo: ~14 scrollwheel clicks starting around 0.4
-  // Text reveal: starts after 1 click (~0.41), completes with buffer before slowmo ends
+  // Slowmo: ~14 scrollwheel clicks starting around 0.05
+  // Text reveal: starts at 0.28 (between old 0.41 and new 0.15), completes with buffer before slowmo ends
   return (
     <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 text-left">
       <h2 className="font-display text-4xl uppercase tracking-[0.12em]">{copy.heading}</h2>
       <div className="space-y-4 text-2xl leading-relaxed text-white/85">
-        <AnimatedParagraph text={paragraph1} startProgress={0.41} endProgress={0.53} scrollYProgress={scrollYProgress} />
-        <AnimatedParagraph text={paragraph2} startProgress={0.53} endProgress={0.65} scrollYProgress={scrollYProgress} />
+        <AnimatedParagraph text={paragraph1} startProgress={0.28} endProgress={0.46} scrollYProgress={scrollYProgress} />
+        <AnimatedParagraph text={paragraph2} startProgress={0.46} endProgress={0.65} scrollYProgress={scrollYProgress} />
       </div>
     </div>
   );
