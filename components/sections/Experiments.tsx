@@ -33,9 +33,10 @@ export function Experiments({ copy, experiments }: ExperimentsProps) {
             <article
               key={experiment.title}
               className={cn(
-                "group overflow-hidden transition-all duration-300",
-                dim ? "blur-[2px] opacity-70 grayscale" : "opacity-100 grayscale-0"
+                "group cursor-pointer overflow-hidden transition-all duration-300",
+                dim ? "blur-[1px] opacity-70 grayscale" : "opacity-100 grayscale-0"
               )}
+              onClick={() => experiment.link && window.open(experiment.link, "_blank")}
               onMouseEnter={() => setHovered(idx)}
               onMouseLeave={() => setHovered(null)}
             >

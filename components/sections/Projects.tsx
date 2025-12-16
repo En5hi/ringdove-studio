@@ -32,7 +32,7 @@ export function Projects({ copy }: ProjectsProps) {
               key={item.title}
               className={cn(
                 "group flex cursor-pointer items-start gap-10 transition-all duration-300",
-                dim ? "blur-[2px] opacity-70 grayscale" : "opacity-100 grayscale-0"
+                dim ? "blur-[1px] opacity-70 grayscale" : "opacity-100 grayscale-0"
               )}
               onClick={() => item.link && window.open(item.link, "_blank")}
               onMouseEnter={() => setHovered(idx)}
