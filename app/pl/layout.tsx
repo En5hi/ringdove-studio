@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import RootLayout from "../layout";
 
 export const metadata: Metadata = {
   title: "Ringdove Studio — Agencja kreatywna",
@@ -11,5 +10,5 @@ export default function PolishLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <RootLayout>{children}</RootLayout>;
+  return children;
 }

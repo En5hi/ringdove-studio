@@ -38,19 +38,19 @@ export const contentPl: SiteContent = {
         {
           title: "Raw Materials",
           subtitle: "Imersyjny landing z kinetyczną typografią.",
-          tags: ["WebGL-lite", "Framer Motion", "Storytelling"],
+          tags: ["WebGL-lite", "Framer Motion", "Opowiadanie"],
           link: "#"
         },
         {
           title: "Parallel Index",
           subtitle: "Produkt danych w filmowej oprawie.",
-          tags: ["UI", "Design systemy", "Performance"],
+          tags: ["UI produktu", "Systemy designu", "Wydajność"],
           link: "#"
         },
         {
           title: "Northbound",
           subtitle: "Editorial modowy z responsywnym tempem.",
-          tags: ["E-commerce", "Motion", "Narracja"],
+          tags: ["E-commerce", "Animacja", "Narracja"],
           link: "#"
         }
       ]
