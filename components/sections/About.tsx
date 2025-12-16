@@ -59,7 +59,7 @@ function AnimatedParagraph({ text, startProgress, endProgress, scrollYProgress }
 
 export function About({ copy, scrollYProgress }: AboutProps) {
   // Split body text into paragraphs
-  const paragraphs = copy.body.split('\n\n').filter(p => p.trim());
+  const paragraphs = (copy.body || '').split('\n\n').filter(p => p.trim());
   const [paragraph1, paragraph2] = paragraphs;
   
   // If scrollYProgress is provided (from StickySection), use animated paragraphs
