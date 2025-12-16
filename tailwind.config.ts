@@ -17,14 +17,8 @@ const config: Config = {
         border: "#1c252b"
       },
       fontFamily: {
-        display: ["var(--font-display)", "PP Neue Montreal", "Helvetica", "Arial", "sans-serif"],
-        body: [
-          "var(--font-body)",
-          "JetBrains Mono",
-          "SFMono-Regular",
-          "Menlo",
-          "monospace"
-        ]
+        display: ["var(--font-display)", "Instrument Sans", "Helvetica", "Arial", "sans-serif"],
+        body: ["var(--font-body)", "Instrument Sans", "Helvetica", "Arial", "sans-serif"]
       },
       boxShadow: {
         glow: "0 0 60px rgba(111, 255, 233, 0.25)"

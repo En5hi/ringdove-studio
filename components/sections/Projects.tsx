@@ -1,74 +1,61 @@
 "use client";
 
-import { motion } from "framer-motion";
 import type { SiteContent } from "../../lib/i18n";
 import { Button } from "../ui/Button";
 
-type ProjectsProps = {
+export type ProjectsProps = {
   copy: SiteContent["sections"]["projects"];
 };
 
 export function Projects({ copy }: ProjectsProps) {
   return (
-    <motion.section
-      id="projects"
-      className="rounded-3xl border border-border bg-white/5 p-8 backdrop-blur-xl sm:p-10"
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-col gap-2">
-          <h2 className="font-display text-3xl sm:text-4xl">{copy.heading}</h2>
-          <p className="text-muted">{copy.intro}</p>
-        </div>
-        <div className="grid gap-4">
-          {copy.items.map((item, idx) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: idx * 0.05 }}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 via-white/0 to-white/5 p-5"
-            >
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <h3 className="font-display text-2xl">{item.title}</h3>
-                    <p className="text-muted">{item.subtitle}</p>
-                  </div>
-                  <div className="hidden text-xs uppercase tracking-[0.2em] text-muted sm:block">
-                    {String(idx + 1).padStart(2, "0")}
-                  </div>
+    <div className="mx-auto flex max-w-5xl flex-col gap-6 text-left">
+      <div className="space-y-2">
+        <h2 className="font-display text-4xl uppercase tracking-[0.12em]">{copy.heading}</h2>
+        <p className="text-white/75">{copy.intro}</p>
+      </div>
+      <div className="flex w-full flex-col gap-5">
+        {copy.items.map((item, idx) => (
+          <div
+            key={item.title}
+            className="group overflow-hidden rounded-lg border border-white/20 bg-black/60 shadow-[0_20px_60px_rgba(0,0,0,0.25)] transition hover:border-white/35"
+          >
+            <div className="flex flex-col gap-4 px-6 py-6">
+              <div className="flex items-start justify-between gap-4">
+                <div className="space-y-2">
+                  <h3 className="font-display text-2xl uppercase tracking-[0.12em] text-white">
+                    {item.title}
+                  </h3>
+                  <p className="max-w-3xl text-white/70">{item.subtitle}</p>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {item.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-white/10 px-3 py-1 text-xs text-muted transition group-hover:border-white/30 group-hover:text-white"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <span className="text-2xl leading-none text-white">&nearr;</span>
+              </div>
+              <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.2em] text-white/70">
+                {item.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-sm border border-white/20 bg-black/70 px-3 py-1"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="flex items-center justify-between text-xs uppercase tracking-[0.24em] text-white/40">
+                <span>{String(idx + 1).padStart(2, "0")}</span>
                 {item.link && (
-                  <div>
-                    <Button
-                      variant="ghost"
-                      className="text-sm"
-                      onClick={() => window.open(item.link, "_blank")}
-                    >
-                      View
-                    </Button>
-                  </div>
+                  <Button
+                    variant="ghost"
+                    className="px-0 text-xs uppercase tracking-[0.2em]"
+                    onClick={() => window.open(item.link, "_blank")}
+                  >
+                    View
+                  </Button>
                 )}
               </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </div>
+        ))}
       </div>
-    </motion.section>
+    </div>
   );
 }

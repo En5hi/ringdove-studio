@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import type { Experiment, SiteContent } from "../lib/i18n";
 import { Hero } from "./hero/Hero";
 import { SlidingPanel } from "./panel/SlidingPanel";
@@ -13,6 +13,7 @@ type PageShellProps = {
 
 export function PageShell({ content, experiments }: PageShellProps) {
   const heroRef = useRef<HTMLElement | null>(null);
+  const [activeSection, setActiveSection] = useState<string>("about");
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
@@ -26,6 +27,7 @@ export function PageShell({ content, experiments }: PageShellProps) {
     [0, 0.7, 1],
     ["blur(0px)", "blur(12px)", "blur(12px)"]
   );
+  const heroTintStrength = useTransform(scrollYProgress, [0, 0.9, 1], [0, 0, 1]);
   const panelY = useTransform(scrollYProgress, [0, 1], ["50vh", "0vh"]);
 
   return (
@@ -38,10 +40,16 @@ export function PageShell({ content, experiments }: PageShellProps) {
           backgroundBlur={heroBackgroundBlur}
           parallaxY={heroParallax}
           locale={content.locale}
+          tintStrength={heroTintStrength}
+          activeSection={activeSection}
         />
       </section>
       <motion.div style={{ y: panelY }} className="relative z-20 -mt-32">
-        <SlidingPanel content={content} experiments={experiments} />
+        <SlidingPanel
+          content={content}
+          experiments={experiments}
+          onSectionChange={setActiveSection}
+        />
       </motion.div>
     </main>
   );

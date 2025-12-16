@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
-import { JetBrains_Mono } from "next/font/google";
+import { Instrument_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { UnicornSdk } from "../components/unicorn/UnicornSdk";
 
-const body = JetBrains_Mono({
-  subsets: ["latin", "latin-ext"],
+const body = Instrument_Sans({
+  subsets: ["latin"],
   variable: "--font-body",
+  display: "swap"
+});
+
+const logo = Instrument_Serif({
+  subsets: ["latin"],
+  style: ["normal"],
+  weight: ["400"],
+  variable: "--font-logo",
   display: "swap"
 });
 
@@ -25,7 +33,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale === "pl" ? "pl" : "en"} className="dark">
-      <body className={`${body.variable} bg-background text-white`}>
+      <body className={`${body.variable} ${logo.variable} bg-background text-white`}>
         <UnicornSdk />
         {children}
       </body>
