@@ -22,9 +22,9 @@ export const contentPl: SiteContent = {
   },
   sections: {
     about: {
-      heading: "Studio z wyraźnym punktem widzenia.",
+      heading: "Design z wysokości",
       body:
-        "Łączymy śmiałą eksplorację wizualną z solidnym wykonaniem. Dostarczamy szybko, iterujemy z projektantami i dbamy o mikrodetale, które sprawiają, że interfejsy żyją.",
+        "Jesteśmy studio designu, które przekształca odważne pomysły w wyjątkowe doświadczenia cyfrowe. Nasze podejście designer-first łączy eksplorację wizualną z solidnym wykonaniem—dostarczamy szybko, iterujemy z intencją i dbamy o detale, które sprawiają, że interfejsy żyją.\n\nOd interaktywnych opowieści marek po design oprogramowania audio, specjalizujemy się w pracy, która nie tylko świetnie wygląda, ale przede wszystkim działa.",
       highlights: [
         "Opowieści marek w interaktywnej formie",
         "Creative development dla kampanii",

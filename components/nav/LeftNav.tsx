@@ -49,8 +49,8 @@ export function LeftNav({ items, activeId }: LeftNavProps) {
                   <motion.button
                     onClick={() => scrollTo(item.id)}
                     className={cn(
-                      "group flex w-full items-center gap-4 rounded-md border border-transparent px-2 py-2.5 text-left transition-all duration-500",
-                      active ? "text-white" : "text-white/55 hover:border-white/10 hover:text-white"
+                      "group flex w-full items-center gap-4 rounded-md px-2 py-2.5 text-left transition-all duration-500",
+                      active ? "text-white" : "text-white/55 hover:text-white"
                     )}
                     animate={{
                       opacity: active ? 1 : 0.9

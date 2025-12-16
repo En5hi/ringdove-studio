@@ -21,5 +21,12 @@ export const experiments: Experiment[] = [
     tags: ["Parallax", "Story"],
     link: "#",
     image: ""
+  },
+  {
+    title: "Waveform Grid",
+    description: "Real-time mesh deformation driven by noise.",
+    tags: ["WebGL", "Procedural"],
+    link: "#",
+    image: ""
   }
 ];

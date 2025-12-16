@@ -12,28 +12,39 @@ type StickySectionProps = PropsWithChildren<{
 export function StickySection({ id, className, children }: StickySectionProps) {
   const ref = useRef<HTMLElement | null>(null);
   const reduceMotion = useReducedMotion();
+  const isFirstSection = id === "about";
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
   });
 
+  // More overlap - sections appear earlier and stay visible longer
   const opacity = useTransform(
     scrollYProgress,
-    [0, 0.15, 0.45, 0.65, 0.9, 1],
-    [0, 1, 1, 0.97, 0.6, 0]
+    isFirstSection ? [0, 0.1, 0.65, 0.8] : [0.2, 0.3, 0.4, 0.6, 0.65, 0.75],
+    isFirstSection ? [1, 1, 1, 0] : [0, 0.5, 1, 1, 0.5, 0]
   );
+  
   const blur = useTransform(
     scrollYProgress,
-    [0, 0.15, 0.45, 0.65, 0.9, 1],
+    isFirstSection ? [0, 0.6, 0.65, 0.8] : [0.2, 0.3, 0.4, 0.6, 0.65, 0.75],
     reduceMotion
       ? ["blur(0px)", "blur(0px)", "blur(0px)", "blur(0px)", "blur(0px)", "blur(0px)"]
-      : ["blur(20px)", "blur(10px)", "blur(0px)", "blur(0px)", "blur(14px)", "blur(26px)"]
+      : isFirstSection
+        ? ["blur(0px)", "blur(0px)", "blur(6px)", "blur(24px)"]
+        : ["blur(20px)", "blur(4px)", "blur(0px)", "blur(0px)", "blur(6px)", "blur(24px)"]
   );
+  
+  // Constant slow upward motion - no acceleration, sections slide up at steady pace
   const y = useTransform(
     scrollYProgress,
-    [0, 0.25, 0.5, 0.7, 1],
-    reduceMotion ? [0, 0, 0, 0, 0] : [70, 20, 0, -10, -90]
+    isFirstSection ? [0, 0.1, 0.65, 0.8] : [0.2, 0.3, 0.4, 0.6, 0.65, 0.75],
+    reduceMotion 
+      ? [0, 0, 0, 0, 0, 0] 
+      : isFirstSection 
+        ? [0, 0, -30, -80] 
+        : [170, 80, 0, -30, -80, -150]
   );
 
   return (
@@ -41,17 +52,18 @@ export function StickySection({ id, className, children }: StickySectionProps) {
       id={id}
       ref={ref}
       className={cn(
-        "relative min-h-[150vh] scroll-mt-24",
-        "flex items-center justify-center",
+        "relative min-h-[140vh] scroll-mt-24",
         className
       )}
     >
-      <motion.div
-        style={{ opacity, filter: blur, y }}
-        className="pointer-events-auto sticky top-1/2 -translate-y-1/2 transform"
-      >
-        {children}
-      </motion.div>
+      <div className="sticky top-0 flex h-screen items-center justify-center">
+        <motion.div
+          style={{ opacity, filter: blur, y }}
+          className="pointer-events-auto"
+        >
+          {children}
+        </motion.div>
+      </div>
     </section>
   );
 }

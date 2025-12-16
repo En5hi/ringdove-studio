@@ -176,7 +176,7 @@ export function Hero({
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-12">
+        <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-8">
           <svg
             aria-hidden
             className="h-6 w-6 animate-bounce-slow text-white/70"
@@ -197,7 +197,7 @@ export function Hero({
               fontFamily: "var(--font-body)"
             }}
           >
-            {"A\nDIGITAL\nDESIGN\nAGENCY"}
+            {"DESIGN\nLED\nDIGITAL\nSTUDIO"}
           </motion.div>
           <motion.div
             className="flex flex-col items-end gap-2 text-right"
@@ -206,8 +206,8 @@ export function Hero({
               fontFamily: "var(--font-body)"
             }}
           >
-            <div className="whitespace-pre">{"BASED\nIN POLAND"}</div>
-            <div className="whitespace-pre">{"SHIPPING\nEVERYWHERE"}</div>
+            <div className="whitespace-pre">{"HATCHED\nIN POLAND"}</div>
+            <div className="whitespace-pre">{"FLYING\nEVERYWHERE"}</div>
           </motion.div>
         </div>
       </motion.div>

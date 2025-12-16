@@ -22,9 +22,9 @@ export const contentEn: SiteContent = {
   },
   sections: {
     about: {
-      heading: "Studio with a point of view.",
+      heading: "Design at altitude",
       body:
-        "We pair bold visual exploration with resilient engineering. We ship fast, iterate with designers, and obsess over the small details that make interfaces feel alive.",
+        "We're a design-led digital studio that transforms bold ideas into exceptional experiences. Our designer-first approach pairs visual exploration with resilient engineering—shipping fast, iterating with intent, and obsessing over the details that make interfaces feel alive. From interactive brand stories to audio software design, we specialize in work that doesn't just look brilliant, but works brilliantly.",
       highlights: [
         "Interactive brand storytelling",
         "Creative dev for campaigns",

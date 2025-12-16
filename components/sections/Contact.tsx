@@ -38,7 +38,7 @@ export function Contact({ copy }: ContactProps) {
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-4xl flex-col items-start gap-6 text-left">
+    <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-6 text-left">
       <div className="flex flex-col gap-3">
         <h2 className="font-display text-4xl uppercase tracking-[0.12em]">{copy.heading}</h2>
         <p className="text-white/75">{copy.intro}</p>
@@ -70,14 +70,14 @@ export function Contact({ copy }: ContactProps) {
         </label>
         <input type="text" name="honey" aria-hidden defaultValue="" className="hidden" />
         <input type="hidden" name="startedAt" value={startedAt} />
-        <div className="md:col-span-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <Button type="submit" disabled={pending}>
-            {pending ? "Sending..." : copy.cta}
-          </Button>
-          <div className="text-sm text-muted">
+        <div className="md:col-span-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
+          <div className="text-sm text-muted sm:order-1">
             {status === "success" && <span className="text-accent">{copy.success}</span>}
             {status === "error" && <span className="text-red-300">{error ?? copy.error}</span>}
           </div>
+          <Button type="submit" disabled={pending} className="uppercase sm:order-2">
+            {pending ? "SENDING..." : copy.cta.toUpperCase()}
+          </Button>
         </div>
       </form>
     </div>

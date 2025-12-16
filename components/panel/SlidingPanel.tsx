@@ -27,8 +27,8 @@ export function SlidingPanel({ content, experiments, onSectionChange }: SlidingP
   const observerOptions = useMemo(
     () => ({
       root: null,
-      rootMargin: "-35% 0px -35% 0px",
-      threshold: 0.1
+      rootMargin: "-30% 0px -30% 0px",
+      threshold: [0, 0.25, 0.5, 0.75, 1]
     }),
     []
   );
@@ -59,9 +59,9 @@ export function SlidingPanel({ content, experiments, onSectionChange }: SlidingP
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="relative mx-auto max-w-7xl px-5 py-12 lg:px-10 lg:py-16">
-        <div className="grid gap-12 lg:grid-cols-[18%_1fr] lg:gap-16">
+        <div className="grid gap-12 lg:grid-cols-[18%_1fr] lg:gap-24">
           <div className="lg:col-span-2">
-            <div className="grid gap-12 lg:grid-cols-[18%_1fr] lg:gap-16">
+            <div className="grid gap-12 lg:grid-cols-[18%_1fr] lg:gap-24">
               <div className="lg:sticky lg:top-0 lg:h-[100vh] lg:pr-6">
                 <LeftNav items={content.nav.items} activeId={active} />
               </div>

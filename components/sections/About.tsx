@@ -8,21 +8,16 @@ type AboutProps = {
 
 export function About({ copy }: AboutProps) {
   return (
-    <div className="mx-auto flex max-w-3xl flex-col items-start gap-6 text-left">
+    <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 text-left">
       <h2 className="font-display text-4xl uppercase tracking-[0.12em]">{copy.heading}</h2>
-      <p className="text-lg text-white/80">{copy.body}</p>
-      {copy.highlights && (
-        <div className="grid w-full gap-3 sm:grid-cols-3">
-          {copy.highlights.map((item) => (
-            <div
-              key={item}
-              className="border border-white/20 bg-black/60 px-4 py-3 text-sm uppercase tracking-wide text-white/80"
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="space-y-4 text-2xl leading-relaxed text-white/85">
+        <p>
+          We're a design-led digital studio that transforms bold ideas into exceptional experiences. Our designer-first approach pairs visual exploration with resilient engineering—shipping fast, iterating with intent, and obsessing over the details that make interfaces feel alive.
+        </p>
+        <p>
+          From interactive brand stories to audio software design, we specialize in work that doesn't just look brilliant, but works brilliantly.
+        </p>
+      </div>
     </div>
   );
 }
