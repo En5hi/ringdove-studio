@@ -5,8 +5,7 @@ import {
   type MotionValue,
   useMotionTemplate,
   useMotionValue,
-  useMotionValueEvent,
-  useTransform
+  useMotionValueEvent
 } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Image from "next/image";

@@ -58,7 +58,7 @@ export function StickySection({ id, className, children }: StickySectionProps) {
 
   // Clone children and pass scrollYProgress if this is the About section
   const childrenWithProps = isFirstSection && isValidElement(children)
-    ? cloneElement(children, { scrollYProgress } as any)
+    ? cloneElement(children, { scrollYProgress } as { scrollYProgress: typeof scrollYProgress })
     : children;
 
   return (

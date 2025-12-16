@@ -11,33 +11,50 @@ type AboutProps = {
 const paragraph1 = "We're a design-led digital studio that transforms bold ideas into exceptional experiences. Our designer-first approach pairs visual exploration with resilient engineering—shipping fast, iterating with intent, and obsessing over the details that make interfaces feel alive.";
 const paragraph2 = "From interactive brand stories to audio software design, we specialize in work that doesn't just look brilliant, but works brilliantly.";
 
+function AnimatedWord({ word, index, totalWords, startProgress, endProgress, scrollYProgress, isLast }: { 
+  word: string; 
+  index: number; 
+  totalWords: number; 
+  startProgress: number; 
+  endProgress: number; 
+  scrollYProgress: MotionValue<number>;
+  isLast: boolean;
+}) {
+  const wordProgress = index / totalWords;
+  const wordStart = startProgress + wordProgress * (endProgress - startProgress);
+  const wordEnd = startProgress + ((index + 1) / totalWords) * (endProgress - startProgress);
+  
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, startProgress, wordStart, wordEnd, endProgress, 1],
+    [0.3, 0.3, 0.3, 1, 1, 1]
+  );
+  
+  return (
+    <motion.span style={{ opacity }}>
+      {word}{!isLast && " "}
+    </motion.span>
+  );
+}
+
 function AnimatedParagraph({ text, startProgress, endProgress, scrollYProgress }: { text: string; startProgress: number; endProgress: number; scrollYProgress: MotionValue<number> }) {
   const words = text.split(" ");
   const totalWords = words.length;
   
   return (
     <p>
-      {words.map((word, index) => {
-        // Calculate this word's position within the reveal range
-        const wordProgress = index / totalWords;
-        const wordStart = startProgress + wordProgress * (endProgress - startProgress);
-        const wordEnd = startProgress + ((index + 1) / totalWords) * (endProgress - startProgress);
-        
-        const opacity = useTransform(
-          scrollYProgress,
-          [0, startProgress, wordStart, wordEnd, endProgress, 1],
-          [0.3, 0.3, 0.3, 1, 1, 1]
-        );
-        
-        return (
-          <motion.span
-            key={index}
-            style={{ opacity }}
-          >
-            {word}{index < words.length - 1 && " "}
-          </motion.span>
-        );
-      })}
+      {words.map((word, index) => (
+        <AnimatedWord
+          key={index}
+          word={word}
+          index={index}
+          totalWords={totalWords}
+          startProgress={startProgress}
+          endProgress={endProgress}
+          scrollYProgress={scrollYProgress}
+          isLast={index === words.length - 1}
+        />
+      ))}
     </p>
   );
 }
