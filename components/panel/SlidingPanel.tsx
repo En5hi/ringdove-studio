@@ -24,14 +24,6 @@ export function SlidingPanel({ content, experiments, onSectionChange }: SlidingP
   const reduceMotion = useReducedMotion();
   const footerRef = useRef<HTMLDivElement | null>(null);
 
-  const { scrollYProgress: footerProgress } = useScroll({
-    target: footerRef,
-    offset: ["start 95%", "end 60%"]
-  });
-
-  const footerY = useTransform(footerProgress, [0, 1], [160, 0]);
-  const footerOpacity = useTransform(footerProgress, [0, 1], [0, 1]);
-
   const observerOptions = useMemo(
     () => ({
       root: null,
@@ -89,15 +81,11 @@ export function SlidingPanel({ content, experiments, onSectionChange }: SlidingP
               </div>
             </div>
           </div>
-
-          <motion.div
-            ref={footerRef}
-            className="lg:col-span-2 -mx-5 bg-black px-5 lg:-mx-10 lg:px-10"
-            style={{ y: footerY, opacity: footerOpacity }}
-          >
-            <Footer />
-          </motion.div>
         </div>
+      </div>
+      
+      <div ref={footerRef} className="w-full">
+        <Footer />
       </div>
     </motion.section>
   );
